@@ -23,7 +23,7 @@ docker build -t <image-name> .
 docker run -p 3000:3000 <image-name>
 ```
 
-### For Lazy Fellows
+## For Lazy Fellows
 If you don't want to run the application locally, I got you covered.
-The application is hosted as a Docker container in GCP under the following URL:
+The application is hosted as a Docker container on GCP under the following URL:
 https://dps-challenge-3zs523db7q-ey.a.run.app
