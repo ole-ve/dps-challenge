@@ -1,0 +1,43 @@
+.password-validation-page {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.password-input-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+}
+
+.result-container {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+.validation-step-container {
+  display: flex;
+}
+
+.validation-checkmark {
+  flex: 0;
+  padding-right: 5px;
+}
