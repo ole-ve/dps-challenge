@@ -21,8 +21,9 @@ export function hasValidCharacters(password: string): boolean {
 export async function determineEnglishWords(password: string): Promise<string[]> {
     // Check that no full english word is contained
     const words = extractPotentialWords(password);
+    const relevantWords = words.filter(word => word.length >= 3);
     const englishCheckResult = await Promise.all(
-        words.map(word => isEnglishWord(word).then(match => ({ word, match })))
+        relevantWords.map(word => isEnglishWord(word).then(match => ({ word, match })))
     );
     return englishCheckResult.filter(entry => entry.match).map(entry => entry.word);
 }
