@@ -18,9 +18,6 @@ function App() {
           />
         </div>
         <div className="result-container">
-            <div style={{display: "flex"}}>
-                <a></a>
-            </div>
             <LengthCheckContainer password={password} />
             <LetterCheckContainer password={password} />
             <EnglishWordCheckContainer password={password} />
