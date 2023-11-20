@@ -23,7 +23,7 @@ function App() {
             <EnglishWordCheckContainer password={password} />
         </div>
         <p style={{color: "grey", fontSize: "small"}}>
-            Ole Vester - ole.vester@tum.de - https://github.com/ole-ve/dps-application
+            Ole Vester - ole.vester@tum.de - https://github.com/ole-ve/dps-challenge
         </p>
       </div>
   );
