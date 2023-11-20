@@ -36,8 +36,7 @@ function extractPotentialWords(input: string): string[] {
     const substrings: string[] = [];
     let currentSubstring = '';
 
-    for (let i = 0; i < input.length; i++) {
-        const char = input[i];
+    for (const char of input) {
 
         if (/[a-zA-Z]/.test(char)) {
             currentSubstring += char;
