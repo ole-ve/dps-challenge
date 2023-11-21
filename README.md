@@ -27,3 +27,5 @@ docker run -p 3000:3000 <image-name>
 If you don't want to run the application locally, I got you covered.
 The application is hosted as a Docker container on GCP under the following URL:
 https://dps-challenge-3zs523db7q-ey.a.run.app
+
+**Note**: Startup of the container might take around 10 seconds due to cold start.
