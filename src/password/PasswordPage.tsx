@@ -185,6 +185,8 @@ function determineBarColorConfiguration(password: string, correctLength: boolean
 function determineFirstDisabledIndex(password: string, correctLength: boolean, validCharacters: boolean, minimumOneDigit: boolean, hasNoEnglishWords: boolean) {
     if (correctLength && validCharacters && minimumOneDigit && hasNoEnglishWords) {
         return 5;
+    } else if (correctLength && validCharacters && minimumOneDigit) {
+        return 4;
     } else if (password.length === 0) {
         return 0;
     } else {
