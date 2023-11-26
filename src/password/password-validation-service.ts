@@ -63,16 +63,24 @@ function extractPotentialWords(input: string): string[] {
 }
 
 const dictionaryURL = "https://api.dictionaryapi.dev/api/v2/entries/en";
+const ENGLISH_WORDS_CACHE = new Map<string, boolean>();
 
 /**
  * Check if a given input string is an english word by calling the free dictionary API.
+ * Caches the results in ENGLISH_WORDS_CACHE.
  */
 async function isEnglishWord(word: string): Promise<boolean> {
+    if (ENGLISH_WORDS_CACHE.has(word)) {
+        return ENGLISH_WORDS_CACHE.get(word)!;
+    }
+
     try {
         await axios.get(`${dictionaryURL}/${word}`);
+        ENGLISH_WORDS_CACHE.set(word, true);
         return true;
     } catch (e: any) {
         // The free dictionary API returns 404 if the word does not exist in their dictionary
+        ENGLISH_WORDS_CACHE.set(word, false);
         return e.response?.status !== 404;
     }
 }
