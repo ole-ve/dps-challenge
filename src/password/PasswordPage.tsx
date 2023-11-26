@@ -4,6 +4,8 @@ import { FaEyeSlash } from "react-icons/fa";
 import Confetti from "react-confetti";
 import './PasswordPage.css';
 import { containsMinimumOneDigit, determineEnglishWords, hasCorrectLength, hasValidCharacters } from "./password-validation-service";
+import { nodeModuleNameResolver } from "typescript";
+import { log } from "console";
 
 const validColor = '#77df73';
 
@@ -19,6 +21,11 @@ const setTextColor = '#47494f';
 /* Button Colors. */
 const activeButtonColor = '#2d72f1';
 const inactiveButtonColor = '#ccc';
+
+interface Requirement {
+    isValid: boolean;
+    description: string;
+}
 
 function PasswordPage() {
     const [password, setPassword] = useState<string>('');
@@ -41,10 +48,7 @@ function PasswordPage() {
     const minimumOneDigit = containsMinimumOneDigit(password);
     const hasNoEnglishWords = !isLoading && containedEnglishWords.length === 0;
   
-    const firstDisabledIndex = determineFirstDisabledIndex(password, correctLength, validCharacters, minimumOneDigit, hasNoEnglishWords);
-    const { barColor, lastColoredBarIndex } = determineBarColorConfiguration(password, correctLength, validCharacters, minimumOneDigit, hasNoEnglishWords);
-  
-    const requirements = [
+    const requirements: Requirement[] = [
         {
             isValid: correctLength,
             description: '8 characters minimum'
@@ -62,6 +66,9 @@ function PasswordPage() {
             description: 'No english words'
         }
     ]
+  
+    const firstDisabledIndex = determineFirstDisabledIndex(password, correctLength, validCharacters, minimumOneDigit, hasNoEnglishWords);
+    const { barColor, lastColoredBarIndex } = determineBarColorConfiguration(password, correctLength, validCharacters, minimumOneDigit, hasNoEnglishWords);
 
     const passwordIsValid = requirements.every(({isValid}) => isValid);
 
@@ -155,22 +162,29 @@ const ColoredRequirementListItem = ({isValid, disabled, description}: {isValid: 
  * Determines the color configuration for the bars.
  */
 function determineBarColorConfiguration(password: string, correctLength: boolean, validCharacters: boolean, minimumOneDigit: boolean, hasNoEnglishWords: boolean) {
-    let barColor = unsetBarColor;
     let lastColoredBarIndex: number;
-    if (correctLength && validCharacters && minimumOneDigit && hasNoEnglishWords) {
-      barColor = validColor;
-      lastColoredBarIndex = 3;
-    } else if (correctLength && validCharacters && minimumOneDigit) {
-      barColor = intermediateBarColor;
-      lastColoredBarIndex = 2;
-    } else if (correctLength && validCharacters) {
-      barColor = intermediateBarColor;
-      lastColoredBarIndex = 1;
-    } else if (password.length > 0) {
-      barColor = invalidBarColor;
-      lastColoredBarIndex = 0;
-    } else {
+    let barColor: string;
+
+    if (password.length === 0) {
         lastColoredBarIndex = -1;
+        barColor = unsetBarColor;
+    } else {
+        const firstStepRequirementCount = [correctLength, validCharacters, minimumOneDigit].filter(value => value).length;
+        lastColoredBarIndex = firstStepRequirementCount - 1;
+
+        if (firstStepRequirementCount === 3 && hasNoEnglishWords) {
+            // all requirements fulfilled
+            lastColoredBarIndex = 3;
+            barColor = validColor;
+        } else if (firstStepRequirementCount >= 2 && firstStepRequirementCount <= 3) {
+            barColor = intermediateBarColor;
+        } else if (firstStepRequirementCount === 1) {
+            barColor = invalidBarColor;
+        } else {
+            // no requirements fulfilled
+            barColor = invalidBarColor;
+            lastColoredBarIndex = 1;
+        }
     }
 
     return {
