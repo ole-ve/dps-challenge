@@ -185,16 +185,10 @@ function determineBarColorConfiguration(password: string, correctLength: boolean
 function determineFirstDisabledIndex(password: string, correctLength: boolean, validCharacters: boolean, minimumOneDigit: boolean, hasNoEnglishWords: boolean) {
     if (correctLength && validCharacters && minimumOneDigit && hasNoEnglishWords) {
         return 5;
-    } else if (correctLength && validCharacters && minimumOneDigit) {
-        return 4;
-    } else if (correctLength && validCharacters) {
-        return 3;
-    } else if (correctLength) {
-        return 2;
     } else if (password.length === 0) {
         return 0;
     } else {
-        return 1;
+        return 3;
     }
 }
 
