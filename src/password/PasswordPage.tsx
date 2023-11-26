@@ -4,8 +4,6 @@ import { FaEyeSlash } from "react-icons/fa";
 import Confetti from "react-confetti";
 import './PasswordPage.css';
 import { containsMinimumOneDigit, determineEnglishWords, hasCorrectLength, hasValidCharacters } from "./password-validation-service";
-import { nodeModuleNameResolver } from "typescript";
-import { log } from "console";
 
 const validColor = '#77df73';
 
