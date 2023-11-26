@@ -1,0 +1,50 @@
+.image-rows {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.image-row {
+  display: flex;
+  width: calc(200%); /* Twice the width of one set */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.slide-left {
+  animation-name: slide-left;
+}
+
+.slide-right {
+  animation-name: slide-right;
+}
+
+.image-set {
+  display: flex;
+  flex: 0 0 50%; /* Each set takes up half the width */
+}
+
+.image-set img {
+  width: 5%;
+  height: auto;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+@keyframes slide-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

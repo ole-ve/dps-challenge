@@ -8,10 +8,18 @@ export function hasCorrectLength(password: string): boolean {
 }
 
 /**
- * Return if a given input string only consists of latin letters and digits and if the input contains at least one digit.
+ * Return if a given input string only consists of latin letters and digits.
  */
 export function hasValidCharacters(password: string): boolean {
-    const pattern = /^(?=.*\d)[a-zA-Z0-9]+$/;
+    const pattern = /^[A-Za-z0-9]*$/;
+    return pattern.test(password);
+}
+
+/**
+ * Return if a given input string contains at least one digit.
+ */
+export function containsMinimumOneDigit(password: string): boolean {
+    const pattern = /\d/;
     return pattern.test(password);
 }
 
